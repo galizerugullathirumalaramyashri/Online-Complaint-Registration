@@ -1,8 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
+
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -11,6 +13,7 @@ import NewComplaint from "./pages/NewComplaint";
 import ComplaintDetails from "./pages/ComplaintDetails";
 import Profile from "./pages/Profile";
 import AdminPanel from "./pages/AdminPanel";
+import Notifications from "./pages/Notifications";
 
 const theme = createTheme({
   palette: {
@@ -28,11 +31,13 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Landing />} />
+
           <Route element={<ProtectedRoute />}>
             <Route element={<Layout />}>
               <Route path="/dashboard" element={<Dashboard />} />
@@ -40,6 +45,7 @@ export default function App() {
               <Route path="/complaints/:id" element={<ComplaintDetails />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/admin" element={<AdminPanel />} />
+              <Route path="/notifications" element={<Notifications />} />
             </Route>
           </Route>
         </Routes>

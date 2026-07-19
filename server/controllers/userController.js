@@ -2,7 +2,10 @@ const User = require("../models/User");
 
 exports.getUsers = async (req, res, next) => {
   try {
-    const users = await User.find().select("-password").sort({ createdAt: -1 });
+    const users = await User.find()
+      .select("-password")
+      .sort({ createdAt: -1 });
+
     res.json(users);
   } catch (error) {
     next(error);
@@ -11,7 +14,10 @@ exports.getUsers = async (req, res, next) => {
 
 exports.getAgents = async (req, res, next) => {
   try {
-    const agents = await User.find({ role: "agent" }).select("-password").sort({ createdAt: -1 });
+    const agents = await User.find({ role: "agent" })
+      .select("-password")
+      .sort({ createdAt: -1 });
+
     res.json(agents);
   } catch (error) {
     next(error);
@@ -20,7 +26,15 @@ exports.getAgents = async (req, res, next) => {
 
 exports.updateProfile = async (req, res, next) => {
   try {
-    const allowed = ["name", "phone", "address", "city", "state", "pincode", "department"];
+    // Department is intentionally not editable from the profile page.
+    const allowed = [
+      "name",
+      "phone",
+      "address",
+      "city",
+      "state",
+      "pincode"
+    ];
 
     allowed.forEach((field) => {
       if (req.body[field] !== undefined) {
