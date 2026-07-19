@@ -9,7 +9,6 @@ A full-stack MERN web application that allows citizens to register complaints, t
 - User registration and secure login
 - Submit complaints with:
   - Category
-  - Department
   - Description
   - Address, city, state, and pincode
   - Priority: Low, Medium, or High
